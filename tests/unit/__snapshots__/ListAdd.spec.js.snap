@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListAdd.vue スナップショットテスト 1`] = `
+<form
+  class="add-list"
+>
+  <label>
+    <input
+      class="text-input"
+      placeholder="Add new list"
+      type="text"
+    />
+  </label>
+   
+  <!---->
+</form>
+`;

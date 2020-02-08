@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List.vue スナップショットテスト 1`] = `
+<div
+  class="list"
+>
+  <div
+    class="list-header"
+  >
+    <p
+      class="list-title"
+    >
+      test title
+    </p>
+     
+    <p
+      class="list-counter"
+    >
+      total: 0
+    </p>
+     
+    <div
+      class="delete-list"
+    >
+      x
+    </div>
+  </div>
+   
+  <draggable-stub
+    clone="function(t){return t}"
+    element="div"
+    group="cards"
+    list=""
+  />
+   
+  <cardadd-stub
+    listindex="0"
+  />
+</div>
+`;
