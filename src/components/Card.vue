@@ -6,7 +6,9 @@
 </template>
 
 <script>
-export default {
+import {createComponent} from '@vue/composition-api';
+
+export default createComponent({
   name: "Card",
   props: {
     body: {
@@ -19,19 +21,27 @@ export default {
     },
     cardIndex: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
-  methods: {
-    removeCardFromList() {
+  setup(props) {
+    const {
+      cardIndex,
+      listIndex,
+    } = props;
+
+    const removeCardFromList = () => {
       if (confirm('本当にこのカードを削除しますか？')) {
         this.$store.dispatch('removeCardFromList',
           {
-            cardIndex: this.cardIndex,
-            listIndex: this.listIndex
-          })
+            cardIndex,
+            listIndex,
+          });
       }
-    }
-  }
-};
+    };
+    return {
+      removeCardFromList,
+    };
+  },
+});
 </script>

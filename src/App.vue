@@ -10,7 +10,7 @@ import Board from "./components/Board";
 export default {
   name: 'App',
   components: {
-    Board
+    Board,
   }
 }
 </script>
