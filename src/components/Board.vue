@@ -7,14 +7,14 @@
                :list="lists"
                @end="movingList"
     >
-        <list v-for=
-                  "(item, index) in lists"
-              :key="item.id"
-              :title="item.title"
-              :cards="item.cards"
-              :listIndex="index"
-              @change="movingCard"
-        ></list>
+      <list v-for=
+                "(item, index) in lists"
+            :key="item.id"
+            :title="item.title"
+            :cards="item.cards"
+            :listIndex="index"
+            @change="movingCard"
+      ></list>
     </draggable>
     <ListAdd></ListAdd>
   </main>
@@ -24,8 +24,8 @@
 <script>
 import ListAdd from './ListAdd';
 import List from './List';
-import {mapState} from 'vuex';
 import draggable from 'vuedraggable';
+import {computed} from '@vue/composition-api';
 
 export default {
   name: "Board",
@@ -34,21 +34,25 @@ export default {
     List,
     draggable,
   },
-  computed: {
-    ...mapState([
-      'lists',
-    ]),
-    totalCardCount() {
-      return this.$store.getters.totalCardCount;
-    },
-  },
-  methods: {
-    movingCard() {
-      this.$store.dispatch('updateList', {lists: this.lists});
-    },
-    movingList() {
-      this.$store.dispatch('updateList', {lists: this.lists});
-    }
+  setup(_, context) {
+    const $store = context.root.$store;
+    let lists = $store.state.lists;
+
+    const movingCard = () => {
+      $store.dispatch('updateList', {lists});
+    };
+    const movingList = () => {
+      $store.dispatch('updateList', {lists});
+    };
+
+    const totalCardCount = computed(() => $store.getters.totalCardCount);
+
+    return {
+      movingCard,
+      movingList,
+      lists,
+      totalCardCount,
+    };
   },
 };
 </script>

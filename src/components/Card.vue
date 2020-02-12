@@ -24,15 +24,17 @@ export default createComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, context) {
     const {
       cardIndex,
       listIndex,
     } = props;
 
+    const $store = context.root.$store;
+
     const removeCardFromList = () => {
       if (confirm('本当にこのカードを削除しますか？')) {
-        this.$store.dispatch('removeCardFromList',
+        $store.dispatch('removeCardFromList',
           {
             cardIndex,
             listIndex,

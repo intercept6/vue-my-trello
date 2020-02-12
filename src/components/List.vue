@@ -24,6 +24,7 @@
 import Card from './Card';
 import CardAdd from './CardAdd';
 import draggable from 'vuedraggable';
+import {computed} from '@vue/composition-api';
 
 export default {
   name: "List",
@@ -34,29 +35,46 @@ export default {
     },
     cards: {
       type: Array,
-      required: true
+      required: true,
     },
     listIndex: {
       type: Number,
       required: true,
     },
   },
-  computed: {
-    totalCardInList() {
-      return this.cards.length;
-    }
-  },
-  methods: {
-    removeList() {
+  setup(props, context) {
+    const totalCardInList = computed(() => {
+      return props.cards.length;
+    });
+
+    const $store = context.root.$store;
+    const removeList = () => {
       if (confirm('本当にこのリストを削除しますか？')) {
-        this.$store.dispatch('removeList', {listIndex: this.listIndex});
+        $store.dispatch('removeList', {listIndex: props.listIndex});
       }
-    },
+    };
+
+    return {
+      totalCardInList,
+      removeList,
+    };
   },
+  // computed: {
+  //   totalCardInList() {
+  //     return this.cards.length;
+  //   }
+  // },
+  // methods: {
+  //   removeList() {
+  //     if (confirm('本当にこのリストを削除しますか？')) {
+  //       this.$store.dispatch('removeList', {listIndex: this.listIndex});
+  //     }
+  //   },
+  // },
   components: {
     Card,
     CardAdd,
-    draggable
-  }
+    draggable,
+  },
 };
 </script>

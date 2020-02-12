@@ -1,9 +1,9 @@
-import {createLocalVue, shallowMount} from '@vue/test-utils';
+import {shallowMount} from '@vue/test-utils';
 import VueCompositionApi from '@vue/composition-api';
 import Card from '../../src/components/Card';
+import Vue from 'vue';
 
-const localVue = createLocalVue();
-localVue.use(VueCompositionApi);
+Vue.use(VueCompositionApi);
 
 describe('Card.vue', () => {
   it('カードの作成', () => {
